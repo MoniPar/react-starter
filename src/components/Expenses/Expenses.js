@@ -10,8 +10,8 @@ const Expenses = (props) => {
 
     const saveExpenseYearHandler = (selectedYear) => {
         setEnteredYear(selectedYear);
-        // console.log('In Expenses.js')
-        // console.log(selectedYear);
+        console.log('In Expenses.js')
+        console.log(selectedYear);
     };
 
     return (
