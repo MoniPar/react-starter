@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import ExpenseItem from "./ExpenseItem";
 import ExpensesFilter from "./ExpensesFilter";
+import ExpensesList from "./ExpensesList";
 import Card from '../UI/Card';
 import "./Expenses.css";
 
@@ -11,26 +11,11 @@ const Expenses = (props) => {
     setEnteredYear(selectedYear);
   };
 
-  // Filter through the updated expenses array, return the items with a year that matches the one selected in the dropdown
+  // Filter through the updated expenses array, 
+  // return the items with a year that matches the one selected in the dropdown
   const filteredByYear = props.item.filter((expense) => {
     return expense.date.getFullYear().toString() === enteredYear;
   });
-
-  // Create a variable which holds a default value
-  let expensesContent = <p>No expenses found.</p>
-
-  if (filteredByYear.length > 0) {
-    // Update the variable with the list of expenses
-    expensesContent = filteredByYear.map((expense) => (
-      <ExpenseItem
-        // Add key prop to set a unique value per list item so that React can identify individual items
-        key={expense.id}
-        name={expense.title}
-        amount={expense.amount}
-        date={expense.date}
-      />
-    ));
-  }
 
   return (
     <Card className="expenses">
@@ -38,7 +23,7 @@ const Expenses = (props) => {
         selected={enteredYear}
         onSaveExpenseYear={saveExpenseYearHandler}
       />
-      {expensesContent}
+      <ExpensesList items={filteredByYear}/>
     </Card>
   );
 };

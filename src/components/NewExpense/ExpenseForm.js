@@ -7,6 +7,7 @@ const ExpenseForm = (props) => {
     const [enteredAmount, setEnteredAmount] = useState('');
     const [enteredDate, setEnteredDate] = useState('');
 
+    // Use one state instead of 3 by passing useState an object and grouping together the 3 states
     // const [userInput, setUserInput] = useState({
     //     enteredTitle: '',
     //     enteredAmount: '',
@@ -15,12 +16,13 @@ const ExpenseForm = (props) => {
 
     const titleChangeHandler = (event) => {
         setEnteredTitle(event.target.value);
-        
+        // Update state by copying in the old value, should not be used if the new state depends on previous state
         // setUserInput({
         //     ...userInput,
         //     enteredTitle: event.target.value
         // });
 
+        // Guarantees that the latest state snapshot is being used
         // setUserInput((prevState) => {
         //     return {...prevState, enteredTitle: event.target.value}
         // })
@@ -55,13 +57,18 @@ const ExpenseForm = (props) => {
     const submitHandler = (event) => {
         event.preventDefault();
 
+        // Combine all entered data into the expenseData object
         const expenseData = {
             title: enteredTitle,
             amount: enteredAmount,
             date: new Date(enteredDate)
         };
         // console.log(expenseData);
+        
+        // Passes on gathered data up to parent component NewExpense where function is defined
         props.onSaveExpenseData(expenseData);
+        
+        // Clear the input after form submission
         setEnteredTitle('');
         setEnteredAmount('');
         setEnteredDate('');
@@ -73,6 +80,7 @@ const ExpenseForm = (props) => {
                 <div className='new-expense__control'>
                     <label>Title</label>
                     <input type='text'
+                        // creates a 2-way binding which feeds the state back into the input
                         value={enteredTitle} 
                         onChange={titleChangeHandler} />
                 </div>
@@ -87,7 +95,7 @@ const ExpenseForm = (props) => {
                     <label>Date</label>
                     <input type='date' 
                         value={enteredDate}
-                        min='2023-01-01' max='2026-12-21' 
+                        min='2021-01-01' max='2024-12-21' 
                         onChange={dateChangeHandler} />
                 </div>
             </div>
