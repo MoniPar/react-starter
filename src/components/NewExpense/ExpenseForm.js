@@ -7,51 +7,16 @@ const ExpenseForm = (props) => {
     const [enteredAmount, setEnteredAmount] = useState('');
     const [enteredDate, setEnteredDate] = useState('');
 
-    // Use one state instead of 3 by passing useState an object and grouping together the 3 states
-    // const [userInput, setUserInput] = useState({
-    //     enteredTitle: '',
-    //     enteredAmount: '',
-    //     enteredDate: ''
-    // });
-
     const titleChangeHandler = (event) => {
         setEnteredTitle(event.target.value);
-        // Update state by copying in the old value, should not be used if the new state depends on previous state
-        // setUserInput({
-        //     ...userInput,
-        //     enteredTitle: event.target.value
-        // });
-
-        // Guarantees that the latest state snapshot is being used
-        // setUserInput((prevState) => {
-        //     return {...prevState, enteredTitle: event.target.value}
-        // })
     };
 
     const amountChangeHandler = (event) => {
         setEnteredAmount(event.target.value);
-        
-        // setUserInput({
-        //     ...userInput,
-        //     enteredAmount: event.target.value
-        // });
-
-        // setUserInput((prevState) => {
-        //     return {...prevState, enteredAmount: event.target.value}
-        // })
     };
     
     const dateChangeHandler = (event) => {
         setEnteredDate(event.target.value);
-        
-        // setUserInput({
-        //     ...userInput,
-        //     enteredDate: event.target.value
-        // });
-
-        // setUserInput((prevState) => {
-        //     return {...prevState, enteredDate: event.target.value}
-        // })
     };
 
     const submitHandler = (event) => {
@@ -65,7 +30,7 @@ const ExpenseForm = (props) => {
         };
         // console.log(expenseData);
         
-        // Passes on gathered data up to parent component NewExpense where function is defined
+        // Pass on gathered data up to parent component NewExpense where function is defined
         props.onSaveExpenseData(expenseData);
         
         // Clear the input after form submission
@@ -100,6 +65,7 @@ const ExpenseForm = (props) => {
                 </div>
             </div>
             <div className='new-expense__actions'>
+                <button type='button' onClick={props.onCancel}>Cancel</button>
                 <button type='submit'>Add Expense</button>
             </div>
         </form>
