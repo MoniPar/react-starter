@@ -25,7 +25,7 @@ const ExpenseForm = (props) => {
         // Combine all entered data into the expenseData object
         const expenseData = {
             title: enteredTitle,
-            amount: enteredAmount,
+            amount: +enteredAmount,  // + sign enforces a number conversion
             date: new Date(enteredDate)
         };
         // console.log(expenseData);
